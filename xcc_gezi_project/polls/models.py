@@ -14,3 +14,14 @@ class Meishi(models.Model):
     def __str__(self):  # 重写直接输出类的方法
         return "<Meishi:{id=%s,food_name=%s,food_author=%s,food_money=%s,food_star=%s}>" \
                % (self.id, self.food_name, self.food_author, self.food_money, self.food_star)
+
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
